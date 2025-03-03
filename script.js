@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // Validation function that returns an error message if invalid
+        // Validation function, returns an error message if invalid
         function validateField(input, pattern) {
             if (!input.value.match(pattern)) {
                 let msg = `Invalid input: ${input.placeholder}`;
@@ -49,10 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
             return "";
         }
 
-        // Test Version: 
+        // Production Version: Prevent submission if there are errors
         form.addEventListener("submit", function (event) {
-            // Comment out or remove preventDefault() to allow natural submission
-            // event.preventDefault();
+            event.preventDefault(); // Prevent default form submission
 
             formErrors = [];
             errorMsg.textContent = "";
@@ -64,8 +63,24 @@ document.addEventListener("DOMContentLoaded", function () {
             if (errName || errEmail) {
                 errorMsg.textContent = errName + " " + errEmail;
                 formErrorsField.value = JSON.stringify(formErrors);
-                // Do not return; allow submission to continue for testing purposes
+                return; // Stop submission if errors exist
             }
+
+            // Send the form data via fetch()
+            const formData = new FormData(form);
+            fetch("https://httpbin.org/post", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                infoMsg.textContent = "✅ Message successfully sent!";
+                form.reset(); // Clear form after submission
+                charCountOutput.textContent = "500 characters left";
+            })
+            .catch(error => {
+                errorMsg.textContent = "❌ An error occurred. Please try again.";
+            });
         });
     }
 });
