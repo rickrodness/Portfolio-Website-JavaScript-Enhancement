@@ -1,13 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Dark mode toggle elements
+    /* ======================================
+       1) Dark Mode Toggle 
+       ====================================== */
     const themeToggle = document.getElementById("theme-toggle");
+
     function setTheme(theme) {
         document.documentElement.dataset.theme = theme;
         localStorage.setItem("theme", theme);
+
         if (themeToggle) {
+            // Switch icon based on theme
             themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
         }
     }
+
     if (themeToggle) {
         themeToggle.addEventListener("click", function () {
             const currentTheme = document.documentElement.dataset.theme;
@@ -15,10 +21,93 @@ document.addEventListener("DOMContentLoaded", function () {
             setTheme(newTheme);
         });
     }
+
+    // Load saved theme (dark/light) from localStorage or default to 'light'
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
 
-    // Contact form elements (if present)
+    /* ======================================
+       2) Theme Customizer (Extra Credit)
+       ====================================== */
+    // Elements from the Theme Customizer section
+    const customThemeNameInput = document.getElementById("customThemeName");
+    const customTextColorInput = document.getElementById("customTextColor");
+    const customBgColorInput = document.getElementById("customBgColor");
+    const customFontSelect = document.getElementById("customFontSelect");
+    const applyCustomThemeBtn = document.getElementById("applyCustomTheme");
+    const saveCustomThemeBtn = document.getElementById("saveCustomTheme");
+    const loadCustomThemeBtn = document.getElementById("loadCustomTheme");
+
+    // Function to apply the custom theme by updating CSS variables
+    function applyCustomTheme(themeName, textColor, bgColor, fontFamily) {
+        document.documentElement.style.setProperty('--text-color', textColor);
+        document.documentElement.style.setProperty('--background-color', bgColor);
+        document.documentElement.style.setProperty('--font-family', fontFamily);
+
+        // Optionally set a data-theme attribute
+        document.documentElement.dataset.theme = themeName || 'custom';
+    }
+
+    // Apply button: immediately apply the chosen colors/font to the page
+    if (applyCustomThemeBtn) {
+        applyCustomThemeBtn.addEventListener('click', () => {
+            const themeName = customThemeNameInput.value.trim() || 'custom';
+            const textColor = customTextColorInput.value;
+            const bgColor = customBgColorInput.value;
+            const fontFamily = customFontSelect.value;
+
+            applyCustomTheme(themeName, textColor, bgColor, fontFamily);
+        });
+    }
+
+    // Save button: store the custom theme in localStorage
+    if (saveCustomThemeBtn) {
+        saveCustomThemeBtn.addEventListener('click', () => {
+            const themeName = customThemeNameInput.value.trim() || 'custom';
+            const textColor = customTextColorInput.value;
+            const bgColor = customBgColorInput.value;
+            const fontFamily = customFontSelect.value;
+
+            const customTheme = {
+                themeName,
+                textColor,
+                bgColor,
+                fontFamily
+            };
+            localStorage.setItem("customTheme", JSON.stringify(customTheme));
+            alert("Custom theme saved!");
+        });
+    }
+
+    // Load button: retrieve the custom theme from localStorage and apply it
+    if (loadCustomThemeBtn) {
+        loadCustomThemeBtn.addEventListener('click', () => {
+            const saved = localStorage.getItem("customTheme");
+            if (saved) {
+                const customTheme = JSON.parse(saved);
+
+                // Populate the inputs
+                customThemeNameInput.value = customTheme.themeName;
+                customTextColorInput.value = customTheme.textColor;
+                customBgColorInput.value = customTheme.bgColor;
+                customFontSelect.value = customTheme.fontFamily;
+
+                // Apply it to the page
+                applyCustomTheme(
+                    customTheme.themeName,
+                    customTheme.textColor,
+                    customTheme.bgColor,
+                    customTheme.fontFamily
+                );
+            } else {
+                alert("No custom theme found in localStorage!");
+            }
+        });
+    }
+
+    /* ======================================
+       3) Contact Form Validator
+       ====================================== */
     const form = document.getElementById("contactForm");
     if (form) {
         const nameInput = document.getElementById("name");
@@ -39,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // Validation function, returns an error message if invalid
+        // Validation function that returns an error message if invalid
         function validateField(input, pattern) {
             if (!input.value.match(pattern)) {
                 let msg = `Invalid input: ${input.placeholder}`;
@@ -49,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return "";
         }
 
-        // Production Version: Prevent submission if there are errors
+        // Prevent submission if there are errors
         form.addEventListener("submit", function (event) {
             event.preventDefault(); // Prevent default form submission
 
