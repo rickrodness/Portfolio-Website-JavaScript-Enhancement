@@ -292,6 +292,11 @@ img {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+
+    /* NEW: Flexbox layout for stacking form elements */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Adds consistent spacing between form elements */
 }
 
 .contact-form label {
@@ -315,10 +320,16 @@ img {
     outline: none;
 }
 
+/* Ensure output elements display as block-level elements */
+.contact-form output {
+    display: block;
+    width: 100%;
+}
+
 /* Contact Info */
 .contact-info {
     flex: 1;
-    background: var(--background-color); /* using variable */
+    background: var(--background-color);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
