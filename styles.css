@@ -10,6 +10,7 @@
     --text-color: #333;
     --font-size: 16px;
     --spacing: 1rem;
+    --font-family: 'Open Sans', Arial, sans-serif;  
 }
 
 /* Global reset & base styling */
@@ -17,7 +18,7 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     font-size: var(--font-size);
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-family: var(--font-family);
     margin: 0;
     padding: 0;
 
@@ -154,7 +155,7 @@ img {
     }
 }
 
-/* More responsive tweaks */
+/* Responsive tweaks */
 @media (max-width: 600px) {
     nav ul {
         flex-direction: column;
@@ -173,7 +174,7 @@ img {
     }
 }
 
-/* Basic hamburger approach */
+/* Basic hamburger menu */
 @media (max-width: 480px) {
     nav ul {
         display: none;
