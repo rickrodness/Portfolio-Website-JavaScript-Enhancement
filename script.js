@@ -49,36 +49,23 @@ document.addEventListener("DOMContentLoaded", function () {
             return "";
         }
 
-form.addEventListener("submit", function (event) {
-    // Comment out the preventDefault to allow normal submission
-    // event.preventDefault();
+        // Test Version: 
+        form.addEventListener("submit", function (event) {
+            // Comment out or remove preventDefault() to allow natural submission
+            // event.preventDefault();
 
-    formErrors = [];
-    errorMsg.textContent = "";
-    infoMsg.textContent = "";
+            formErrors = [];
+            errorMsg.textContent = "";
+            infoMsg.textContent = "";
 
-    let errName = validateField(nameInput, /^[A-Za-z\s]+$/);
-    let errEmail = validateField(emailInput, /^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+            let errName = validateField(nameInput, /^[A-Za-z\s]+$/);
+            let errEmail = validateField(emailInput, /^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 
-    if (errName || errEmail) {
-        errorMsg.textContent = errName + " " + errEmail;
-        formErrorsField.value = JSON.stringify(formErrors);
-        // Do not call preventDefault here if you want the form to submit naturally
-        // return; 
+            if (errName || errEmail) {
+                errorMsg.textContent = errName + " " + errEmail;
+                formErrorsField.value = JSON.stringify(formErrors);
+                // Do not return; allow submission to continue for testing purposes
+            }
+        });
     }
-
-    // const formData = new FormData(form);
-    // fetch("https://httpbin.org/post", {
-    //     method: "POST",
-    //     body: formData
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     infoMsg.textContent = "✅ Message successfully sent!";
-    //     form.reset();
-    //     charCountOutput.textContent = "500 characters left";
-    // })
-    // .catch(error => {
-    //     errorMsg.textContent = "❌ An error occurred. Please try again.";
-    // });
 });
