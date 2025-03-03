@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiments - Rick Rodness</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="experiments.html" class="active">Experiments</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Fun Hero Section -->
+    <section class="experiment-hero">
+        <h1>⚡ Fun HTML & CSS Experiments ⚡</h1>
+        <p>Testing out unique HTML elements, MathML, SVGs, and more!</p>
+    </section>
+
+    <main class="experiment-container">
+        <!-- Custom Semantic Element -->
+        <highlight-box>
+            <h2>Custom Semantic Element</h2>
+            <p>This box is a **custom element** styled with CSS.</p>
+        </highlight-box>
+
+        <!-- MathML Example -->
+        <section class="experiment-section">
+            <h2>🧮 MathML Formula</h2>
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                <mrow>
+                    <mi>E</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mi>m</mi>
+                        <msup>
+                            <mi>c</mi>
+                            <mn>2</mn>
+                        </msup>
+                    </mrow>
+                </mrow>
+            </math>
+        </section>
+
+        <!-- Miscellaneous HTML Elements -->
+        <section class="experiment-section">
+            <h2>🔍 Interactive HTML Elements</h2>
+
+            <details>
+                <summary>Click to Expand Details</summary>
+                <p>This tag allows collapsible content.</p>
+            </details>
+
+            <blockquote cite="https://www.example.com">
+                "The best way to predict the future is to invent it."
+            </blockquote>
+
+            <figure>
+                <img src="images/example.jpg" alt="Example Image" width="250">
+                <figcaption>Styled Image Caption</figcaption>
+            </figure>
+
+            <pre><code>&lt;h1&gt;This is preformatted code&lt;/h1&gt;</code></pre>
+
+            <dl>
+                <dt>HTML</dt>
+                <dd>HyperText Markup Language</dd>
+                <dt>CSS</dt>
+                <dd>Cascading Style Sheets</dd>
+            </dl>
+        </section>
+
+        <!-- SVG & Canvas Section -->
+        <section class="experiment-section">
+            <h2>🎨 SVG & Canvas Graphics</h2>
+
+            <!-- Canvas Example -->
+            <canvas id="myCanvas" width="200" height="100"></canvas>
+
+            <!-- SVG Example -->
+            <svg width="100" height="100">
+                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+            </svg>
+        </section>
+    </main>
+
+    <footer>
+        <p>📩 Contact: <a href="mailto:rrodness@ucsd.edu">rrodness@ucsd.edu</a></p>
+    </footer>
+
+    <!-- Custom Element Script -->
+    <script>
+        class HelloWorld extends HTMLElement {
+            constructor() {
+                super();
+                console.log("Hello world!");
+            }
+        }
+        customElements.define('hello-world', HelloWorld);
+    </script>
+
+    <noscript>Your browser does not support JavaScript!</noscript>
+</body>
+
+</html>

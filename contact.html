@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Rick Rodness</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="experiments.html">Experiments</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contact-container">
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <h1>Let's Connect</h1>
+            <p>Have a question, opportunity, or just want to chat? Drop a message below!</p>
+        </section>
+
+        <!-- Contact Form & Contact Info Section -->
+        <div class="contact-wrapper">
+            <!-- Contact Form -->
+            <form action="#" method="post" class="contact-form">
+                <h2>Send a Message</h2>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" placeholder="Your message..." required></textarea>
+
+                <button type="submit" class="button">Send Message</button>
+            </form>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h2>Contact Details</h2>
+                <p><strong>Email:</strong> <a href="mailto:rrodness@ucsd.edu">rrodness@ucsd.edu</a></p>
+                <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/rickrodness"
+                        target="_blank">linkedin.com/in/rickrodness</a></p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/rickrodness"
+                        target="_blank">github.com/rickrodness</a></p>
+                <p><strong>Location:</strong> San Diego, CA</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
