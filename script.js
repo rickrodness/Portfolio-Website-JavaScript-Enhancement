@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    /* === Dark Mode Toggle Code === */
+    // Dark mode toggle elements
     const themeToggle = document.getElementById("theme-toggle");
-
     function setTheme(theme) {
         document.documentElement.dataset.theme = theme;
         localStorage.setItem("theme", theme);
@@ -9,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
             themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
         }
     }
-
     if (themeToggle) {
         themeToggle.addEventListener("click", function () {
             const currentTheme = document.documentElement.dataset.theme;
@@ -17,51 +15,58 @@ document.addEventListener("DOMContentLoaded", function () {
             setTheme(newTheme);
         });
     }
-    setTheme(localStorage.getItem("theme") || "light");
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
 
-    /* === Contact Form Handling === */
+    // Contact form elements (if present)
     const form = document.getElementById("contactForm");
     if (form) {
-        form.addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent default form submission
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const messageInput = document.getElementById("message");
+        const charCountOutput = document.getElementById("charCount");
+        const formErrorsField = document.getElementById("formErrors");
+        const errorMsg = document.getElementById("errorMsg");
+        const infoMsg = document.getElementById("infoMsg");
+        let formErrors = [];
 
-            const formData = new FormData(form);
-            const formErrors = [];
-
-            // Validate name
-            const name = formData.get("name");
-            if (!name.match(/^[A-Za-z\s]+$/)) {
-                formErrors.push({ field: "name", message: "Invalid name format." });
-            }
-
-            // Validate email
-            const email = formData.get("email");
-            if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-                formErrors.push({ field: "email", message: "Invalid email format." });
-            }
-
-            // Show validation errors, if any
-            if (formErrors.length > 0) {
-                document.getElementById("formErrors").value = JSON.stringify(formErrors);
-                alert("Please correct the errors before submitting.");
-                return;
-            }
-
-            // Send data asynchronously to httpbin.org
-            fetch("https://httpbin.org/post", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Success:", data);
-                alert("Message sent successfully!");
-                form.reset();
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Something went wrong. Please try again.");
+        // Character countdown for textarea
+        if (messageInput && charCountOutput) {
+            messageInput.addEventListener("input", function () {
+                const remaining = 500 - messageInput.value.length;
+                charCountOutput.textContent = `${remaining} characters left`;
+                charCountOutput.style.color = remaining <= 50 ? "red" : "black";
             });
+        }
+
+        // Validation function that returns an error message if invalid
+        function validateField(input, pattern) {
+            if (!input.value.match(pattern)) {
+                let msg = `Invalid input: ${input.placeholder}`;
+                formErrors.push({ field: input.name, message: msg });
+                return msg;
+            }
+            return "";
+        }
+
+        // On form submission, validate inputs and show errors in errorMsg
+        form.addEventListener("submit", function (event) {
+            formErrors = [];
+            errorMsg.textContent = "";
+            infoMsg.textContent = "";
+            
+            let errName = validateField(nameInput, /^[A-Za-z\s]+$/);
+            let errEmail = validateField(emailInput, /^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+
+            if (errName || errEmail) {
+                // Display the errors in the errorMsg output element
+                errorMsg.textContent = errName + " " + errEmail;
+                event.preventDefault();
+                formErrorsField.value = JSON.stringify(formErrors);
+            } else {
+                // Optionally, set a success message in infoMsg if needed
+                infoMsg.textContent = "Form is valid! Submitting...";
+            }
         });
     }
 });
