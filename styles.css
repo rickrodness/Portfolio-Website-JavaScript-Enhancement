@@ -1,4 +1,8 @@
-/* CSS Variables with fallbacks while using variables (2 pts) */
+/* ==============================
+   1) Light Theme (Default)
+   ============================== */
+
+/* Main variables */
 :root {
     --primary-color: #1e90ff;
     --secondary-color: #ff4500;
@@ -8,23 +12,26 @@
     --spacing: 1rem;
 }
 
+/* Global reset & base styling */
 body {
-    background-color: var(--background-color, #ffffff);
-    color: var(--text-color, #000000);
-    font-size: var(--font-size, 16px);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: var(--font-size);
     font-family: 'Open Sans', Arial, sans-serif;
     margin: 0;
     padding: 0;
+
+    /* Layout approach */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* CSS Flexbox and/or CSS Grid (10 pts) */
+/* Header & nav */
 header {
     width: 100%;
-    background-color: var(--primary-color, blue);
-    padding: var(--spacing, 16px);
+    background-color: var(--primary-color);
+    padding: var(--spacing);
 }
 
 nav ul {
@@ -40,22 +47,23 @@ nav ul li a {
     font-weight: bold;
 }
 
+/* Main layout */
 main {
     display: grid;
     grid-template-columns: 1fr 3fr;
-    gap: var(--spacing, 16px);
-    padding: var(--spacing, 16px);
+    gap: var(--spacing);
+    padding: var(--spacing);
     max-width: 1200px;
     width: 100%;
 }
 
 aside {
-    background-color: var(--secondary-color, orange);
-    padding: var(--spacing, 16px);
+    background-color: var(--secondary-color);
+    padding: var(--spacing);
     color: white;
 }
 
-/* Responsive Design with Media Queries (10 pts) */
+/* Responsive design breakpoints */
 @media (max-width: 1024px) {
     main {
         grid-template-columns: 1fr 2fr;
@@ -66,47 +74,44 @@ aside {
     main {
         grid-template-columns: 1fr;
     }
-
     nav ul {
         flex-direction: column;
         align-items: center;
     }
 }
 
-/* CSS Animations, Transitions, and Transforms */
+/* Link transitions & button styling */
 a {
     transition: color 0.3s ease-in-out;
 }
-
 a:hover {
-    color: var(--secondary-color, orange);
+    color: var(--secondary-color);
 }
 
 .button {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: var(--primary-color, blue);
+    background: var(--primary-color);
     color: white;
     text-decoration: none;
     border-radius: 5px;
     transition: transform 0.2s;
 }
-
 .button:hover {
     transform: scale(1.1);
 }
 
-/* New Selectors like has() */
+/* :has() example */
 section:has(h2) {
-    border-left: 5px solid var(--primary-color, blue);
-    padding-left: var(--spacing, 16px);
+    border-left: 5px solid var(--primary-color);
+    padding-left: var(--spacing);
 }
 
-/* Dynamic viewport units */
+/* Hero background gradient */
 .hero {
     width: 100dvw;
     height: 50dvh;
-    background: linear-gradient(to right, var(--primary-color, blue), var(--secondary-color, orange));
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -115,7 +120,7 @@ section:has(h2) {
     text-align: center;
 }
 
-/* Custom Fonts */
+/* Custom font */
 @font-face {
     font-family: 'Futura PT';
     src: url('FuturaCyrillicBook.woff') format('woff');
@@ -124,16 +129,7 @@ section:has(h2) {
     font-display: swap;
 }
 
-body {
-    font-family: 'Futura PT', Arial, sans-serif;
-}
-
-/* Use wider gamut color */
-body {
-    background-color: color-mix(in srgb, var(--primary-color) 15%, white);
-}
-
-/* Image Styling (Ensures proper size & alignment) */
+/* Image styling */
 img {
     max-width: 100%;
     height: auto;
@@ -152,45 +148,38 @@ img {
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Ensuring images adjust properly for responsive design */
 @media (max-width: 768px) {
     .image-container img {
         width: 100%;
     }
 }
 
-/* Responsive adjustments for small screens */
+/* More responsive tweaks */
 @media (max-width: 600px) {
     nav ul {
         flex-direction: column;
         align-items: center;
     }
-
     .hero {
         height: 40dvh;
         font-size: 1.5rem;
     }
-
     main {
         grid-template-columns: 1fr;
         padding: var(--spacing, 8px);
     }
-
     .image-container img {
         width: 90%;
     }
 }
 
-/* Evidence that your design adjusts to address such things. (1 point) */
+/* Basic hamburger approach */
 @media (max-width: 480px) {
-
-    /* Convert nav to hamburger menu */
     nav ul {
         display: none;
     }
-
     nav::after {
-        content: "☰ Menu";
+        content: '☰ Menu';
         display: block;
         text-align: center;
         font-size: 1.5rem;
@@ -201,18 +190,18 @@ img {
     }
 }
 
-
-/* Resume Page Styling */
+/* ==============================
+   2) Resume Page Styling
+   ============================== */
 .resume-container {
     max-width: 800px;
     margin: auto;
     padding: 2rem;
-    background: white;
+    background: var(--background-color); 
     border-radius: 8px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Resume Sections */
 .resume-section {
     margin-bottom: 2rem;
 }
@@ -222,26 +211,21 @@ img {
     padding-bottom: 5px;
 }
 
-/* Job Experience */
 .job {
     margin-bottom: 1rem;
 }
-
 .job h3 {
     margin-bottom: 0;
 }
 
-/* Skills List */
 .skills-list {
     list-style: none;
     padding: 0;
 }
-
 .skills-list li {
     padding: 5px 0;
 }
 
-/* Resume Download Button */
 .resume-download {
     text-align: center;
     margin-bottom: 2rem;
@@ -257,31 +241,29 @@ img {
     font-weight: bold;
     transition: background 0.3s;
 }
-
 .button:hover {
     background: var(--secondary-color);
 }
 
-/* Social Links */
+/* Social links */
 .social-links {
     list-style: none;
     padding: 0;
 }
-
 .social-links li {
     margin: 5px 0;
 }
-
 .social-links a {
     color: var(--primary-color);
     font-weight: bold;
 }
-
 .social-links a:hover {
     text-decoration: underline;
 }
 
-/* Contact Page Background */
+/* ==============================
+   3) Contact Page Styling
+   ============================== */
 .contact-container {
     max-width: 900px;
     margin: auto;
@@ -298,27 +280,18 @@ img {
     margin-bottom: 2rem;
 }
 
-.contact-hero h1 {
-    margin-bottom: 0.5rem;
-}
-
-/* Contact Layout - Split Form & Info */
+/* Contact Layout */
 .contact-wrapper {
     display: flex;
     gap: 2rem;
 }
 
-/* Contact Form */
 .contact-form {
     flex: 1;
-    background: white;
+    background: var(--background-color); 
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.contact-form h2 {
-    margin-bottom: 1rem;
 }
 
 .contact-form label {
@@ -334,7 +307,6 @@ img {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
-    transition: all 0.3s ease-in-out;
 }
 
 .contact-form input:focus,
@@ -346,7 +318,7 @@ img {
 /* Contact Info */
 .contact-info {
     flex: 1;
-    background: var(--background-color);
+    background: var(--background-color); /* using variable */
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
@@ -360,14 +332,12 @@ img {
     color: var(--primary-color);
     font-weight: bold;
 }
-
 .contact-info a:hover {
     text-decoration: underline;
 }
 
-/* Send Button */
+/* Contact Form Button */
 .button {
-    display: inline-block;
     background: var(--primary-color);
     color: white;
     padding: 12px 20px;
@@ -380,133 +350,34 @@ img {
     margin-top: 1rem;
     width: 100%;
 }
-
 .button:hover {
     background: var(--secondary-color);
     transform: scale(1.05);
 }
 
-/* Responsive Design */
+/* Make contact page responsive */
 @media (max-width: 768px) {
     .contact-wrapper {
         flex-direction: column;
     }
-
     .contact-form,
     .contact-info {
         width: 100%;
     }
 }
 
-/* HERO SECTION - Make it stand out */
-.experiment-hero {
-    text-align: center;
-    padding: 2rem;
-    background: linear-gradient(135deg, var(--primary-color), #0077cc);
-    color: white;
-    border-radius: 15px;
-    margin: 2rem auto;
-    max-width: 800px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    position: relative;
-}
-
-/* Make sure the hero text is readable */
-.experiment-hero h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-}
-
-/* Section Styling */
-.experiment-container {
-    max-width: 900px;
-    margin: auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Give sections some space */
-.experiment-section {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    border-left: 5px solid var(--primary-color);
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.05);
-}
-
-/* Custom Semantic Element */
-highlight-box {
-    display: block;
-    padding: 1rem;
-    background: var(--secondary-color);
-    color: white;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-    font-weight: bold;
-}
-
-/* Fix alignment & spacing for Interactive Elements */
-details {
-    background: #ffffff;
-    padding: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    border: 1px solid #ddd;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.05);
-}
-
-details summary {
-    font-weight: bold;
-}
-
-/* Improve Blockquote appearance */
-blockquote {
-    font-style: italic;
-    color: var(--text-color);
-    padding: 1rem;
-    border-left: 4px solid var(--secondary-color);
-    background: #f0f0f0;
-    border-radius: 5px;
-}
-
-/* SVG & Canvas Styling */
-canvas {
-    border: 2px solid var(--primary-color);
-    display: block;
-    margin: 1rem auto;
-}
-
-svg {
-    display: block;
-    margin: 1rem auto;
-}
-
-/* Responsive Fixes */
-@media (max-width: 768px) {
-    .experiment-hero {
-        width: 90%;
-    }
-
-    .experiment-container {
-        width: 95%;
-    }
-}
-
-/* About Me Page Styling */
+/* ==============================
+   4) About Me Page
+   ============================== */
 .about-container {
     max-width: 900px;
     margin: auto;
     padding: 2rem;
-    background: white;
+    background: var(--background-color); 
     border-radius: 10px;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Hero Section - Makes a Strong First Impression */
 .about-hero {
     text-align: center;
     padding: 2rem;
@@ -518,7 +389,6 @@ svg {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Section Styling */
 .about-section {
     margin-bottom: 2rem;
     padding: 1.5rem;
@@ -528,37 +398,60 @@ svg {
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Improve List Spacing */
 .about-section ul {
     list-style: none;
     padding-left: 0;
 }
-
 .about-section ul li {
     padding: 0.5rem 0;
     font-size: 1.1rem;
 }
-
-/* Profile Image Styling */
 .about-section picture {
     display: flex;
     justify-content: center;
     margin-top: 1rem;
 }
-
 .about-section img {
     width: 70%;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Fixes */
 @media (max-width: 768px) {
     .about-hero {
         width: 90%;
     }
-
     .about-container {
         width: 95%;
     }
+}
+
+/* ==============================
+   5) Dark Theme Overrides
+   ============================== */
+:root[data-theme='dark'] {
+    --primary-color: #446fff;        
+    --secondary-color: #ff8a00;      
+    --background-color: #121212;     /* dark background */
+    --text-color: #eeeeee;           
+}
+
+/* Force body & containers to use the updated colors */
+:root[data-theme='dark'] body {
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* For aside, forms, containers that rely on background color */
+:root[data-theme='dark'] aside,
+:root[data-theme='dark'] .contact-info,
+:root[data-theme='dark'] .contact-form,
+:root[data-theme='dark'] .resume-container,
+:root[data-theme='dark'] .about-container {
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+:root[data-theme='dark'] .about-section {
+    background-color: #2b2b2b !important;
 }
