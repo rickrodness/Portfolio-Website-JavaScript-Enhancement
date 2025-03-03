@@ -49,25 +49,38 @@ document.addEventListener("DOMContentLoaded", function () {
             return "";
         }
 
-        // On form submission, validate inputs and show errors in errorMsg
+        // Handle form submission via fetch()
         form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+
             formErrors = [];
             errorMsg.textContent = "";
             infoMsg.textContent = "";
-            
+
             let errName = validateField(nameInput, /^[A-Za-z\s]+$/);
             let errEmail = validateField(emailInput, /^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 
             if (errName || errEmail) {
-                // Display the errors in the errorMsg output element
                 errorMsg.textContent = errName + " " + errEmail;
-                event.preventDefault();
                 formErrorsField.value = JSON.stringify(formErrors);
-            } else {
-                // Optionally, set a success message in infoMsg if needed
-                formErrorsField.value = "";
-                infoMsg.textContent = "Form is valid! Submitting...";
+                return; // Stop submission if errors exist
             }
+
+            // Send the form data via fetch()
+            const formData = new FormData(form);
+            fetch("https://httpbin.org/post", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                infoMsg.textContent = "✅ Message successfully sent!";
+                form.reset(); // Clear form after submission
+                charCountOutput.textContent = "500 characters left";
+            })
+            .catch(error => {
+                errorMsg.textContent = "❌ An error occurred. Please try again.";
+            });
         });
     }
 });
