@@ -49,38 +49,36 @@ document.addEventListener("DOMContentLoaded", function () {
             return "";
         }
 
-        // Handle form submission via fetch()
-        form.addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent default form submission
+form.addEventListener("submit", function (event) {
+    // Comment out the preventDefault to allow normal submission
+    // event.preventDefault();
 
-            formErrors = [];
-            errorMsg.textContent = "";
-            infoMsg.textContent = "";
+    formErrors = [];
+    errorMsg.textContent = "";
+    infoMsg.textContent = "";
 
-            let errName = validateField(nameInput, /^[A-Za-z\s]+$/);
-            let errEmail = validateField(emailInput, /^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+    let errName = validateField(nameInput, /^[A-Za-z\s]+$/);
+    let errEmail = validateField(emailInput, /^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 
-            if (errName || errEmail) {
-                errorMsg.textContent = errName + " " + errEmail;
-                formErrorsField.value = JSON.stringify(formErrors);
-                return; // Stop submission if errors exist
-            }
-
-            // Send the form data via fetch()
-            const formData = new FormData(form);
-            fetch("https://httpbin.org/post", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                infoMsg.textContent = "✅ Message successfully sent!";
-                form.reset(); // Clear form after submission
-                charCountOutput.textContent = "500 characters left";
-            })
-            .catch(error => {
-                errorMsg.textContent = "❌ An error occurred. Please try again.";
-            });
-        });
+    if (errName || errEmail) {
+        errorMsg.textContent = errName + " " + errEmail;
+        formErrorsField.value = JSON.stringify(formErrors);
+        // Do not call preventDefault here if you want the form to submit naturally
+        // return; 
     }
+
+    // const formData = new FormData(form);
+    // fetch("https://httpbin.org/post", {
+    //     method: "POST",
+    //     body: formData
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     infoMsg.textContent = "✅ Message successfully sent!";
+    //     form.reset();
+    //     charCountOutput.textContent = "500 characters left";
+    // })
+    // .catch(error => {
+    //     errorMsg.textContent = "❌ An error occurred. Please try again.";
+    // });
 });
