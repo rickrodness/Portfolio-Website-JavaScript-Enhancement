@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 formErrorsField.value = JSON.stringify(formErrors);
             } else {
                 // Optionally, set a success message in infoMsg if needed
+                formErrorsField.value = "";
                 infoMsg.textContent = "Form is valid! Submitting...";
             }
         });
